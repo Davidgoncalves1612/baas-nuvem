@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockPro - Sistema de Estoque</title>
+  
+  <!-- Fonte Google Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- MENU -->
+  <aside class="sidebar">
+    <div class="logo">
+      Stock<span>Pro</span>
+    </div>
+
+    <ul class="menu">
+      <li>
+        <a href="#" class="active">📦 Estoque</a>
+      </li>
+      <li>
+        <a href="#">📊 Relatórios</a>
+      </li>
+      <li>
+        <a href="#">⚙️ Configurações</a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main">
+
+    <div class="topbar">
+      <div>
+        <h1>Controle de Estoque</h1>
+        <p>Gerencie seus produtos e acompanhe o estoque em tempo real.</p>
+      </div>
+
+      <button class="btn btn-primary" onclick="abrirModal()">
+        + Novo produto
+      </button>
+    </div>
+
+    <!-- ALERTA -->
+    <div class="alert-box" id="alerta">
+      ⚠️ <strong>Atenção!</strong> Existem produtos com estoque abaixo do mínimo recomendado.
+    </div>
+
+    <!-- CARDS -->
+    <section class="cards">
+      <div class="card">
+        <div class="card-title">Produtos cadastrados</div>
+        <div class="card-value blue" id="totalProdutos">0</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Quantidade em estoque</div>
+        <div class="card-value green" id="totalQuantidade">0</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Valor do estoque</div>
+        <div class="card-value orange" id="valorEstoque">R$ 0,00</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Estoque baixo</div>
+        <div class="card-value red" id="estoqueBaixo">0</div>
+      </div>
+    </section>
+
+    <!-- TABELA -->
+    <section class="content-box">
+
+      <div class="table-header">
+        <h2>Produtos</h2>
+
+        <input
+          type="text"
+          class="search"
+          id="busca"
+          placeholder="🔎 Buscar produto..."
+          oninput="renderizarProdutos()"
+        >
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Quantidade</th>
+              <th>Preço</th>
+              <th>Valor total</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="listaProdutos"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+        <h2 id="tituloModal">Novo produto</h2>
+        <button class="close" onclick="fecharModal()">×</button>
+      </div>
+
+      <form id="formProduto">
+
+        <div class="form-group">
+          <label>Nome do produto</label>
+          <input
+            type="text"
+            id="nome"
+            placeholder="Ex: Teclado Gamer"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Quantidade</label>
+          <input
+            type="number"
+            id="quantidade"
+            min="0"
+            placeholder="Ex: 20"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Preço unitário</label>
+          <input
+            type="number"
+            id="preco"
+            min="0"
+            step="0.01"
+            placeholder="Ex: 149.90"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Estoque mínimo</label>
+          <input
+            type="number"
+            id="minimo"
+            min="0"
+            placeholder="Ex: 5"
+            required
+          >
+        </div>
+
+        <div class="form-buttons">
+          <button
+            type="button"
+            class="btn btn-cancel"
+            onclick="fecharModal()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Salvar produto
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
